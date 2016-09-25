@@ -5,6 +5,7 @@ import * as Actions from '../actions/Actions';
 export const todoPropShape = PropTypes.shape({
   id: PropTypes.number,
   name: PropTypes.string,
+  isComplete: PropTypes.bool.isRequired,
 });
 
 const mapStateToProps = (state, ownProps) => ({
@@ -12,21 +13,50 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = {
-  deleteTodo: v => Actions.deleteTodo(v),
+  deleteTodo: Actions.deleteTodo,
+  toggleTodo: Actions.toggleTodo,
+  changePriority: Actions.changePriority,
 };
 
-const Todo = ({ todo: { name, id }, deleteTodo }) => (
+const Del = ({ isDeleted, children }) => (
+  isDeleted ? <del>{children}</del> : children
+);
+
+Del.propTypes = {
+  isDeleted: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+const Todo = ({ todo, deleteTodo, toggleTodo, changePriority }) => (
   <div>
-    <span style={{ marginRight: '10px' }}>{name}</span>
-    <button type="button" onClick={() => deleteTodo(id)}>
+    <input
+      type="checkbox"
+      checked={todo.isComplete}
+      onChange={() => toggleTodo(todo.id)}
+    />
+    <Del isDeleted={todo.isComplete}>
+      <span style={{ marginRight: '10px' }}>{todo.name}</span>
+    </Del>
+    <button type="button" onClick={() => deleteTodo(todo.id)}>
       remove
     </button>
+    {['high', 'medium', 'low'].map(
+      p => (
+        <input
+          type="radio"
+          checked={todo.priority === p}
+          onChange={() => changePriority(todo.id, p)}
+        />
+      )
+    )}
   </div>
 );
 
 Todo.propTypes = {
   todo: todoPropShape.isRequired,
   deleteTodo: PropTypes.func.isRequired,
+  toggleTodo: PropTypes.func.isRequired,
+  priority: PropTypes.string.isRequired,
 };
 
 export default connect(

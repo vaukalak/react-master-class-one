@@ -1,29 +1,36 @@
 import undoable from 'redux-undo';
-import { ADD_TODO, DELETE_TODO } from '../constants/ActionTypes';
+import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, CHANGE_PRIORITY } from '../constants/ActionTypes';
+import todo from './todo';
 
 const initialState = [];
-let todoId = 0;
 
-const todoReducer = (state = initialState, action) => {
+const todosReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
       {
-        todoId += 1;
         return [
           ...state,
-          {
-            name: `${action.payload} ${todoId}`,
-            id: todoId,
-          },
+          todo(undefined, action),
         ];
+      }
+    case TOGGLE_TODO:
+    case CHANGE_PRIORITY:
+      {
+        return state.map(t => {
+          if (t.id === action.payload.id) {
+            return todo(t, action)
+          } else {
+            return t;
+          }
+        });
       }
     case DELETE_TODO:
       {
-        return state.filter(t => t.id !== action.payload);
+        return state.filter(t => t.id !== action.payload.id);
       }
     default:
       return state;
   }
 };
 
-export default undoable(todoReducer);
+export default undoable(todosReducer);
