@@ -5,6 +5,7 @@ import * as Actions from '../actions/Actions';
 export const todoPropShape = PropTypes.shape({
   id: PropTypes.number,
   name: PropTypes.string,
+  priority: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,
 });
 
@@ -43,6 +44,7 @@ const Todo = ({ todo, deleteTodo, toggleTodo, changePriority }) => (
     {['high', 'medium', 'low'].map(
       p => (
         <input
+          key={`radio_${p}`}
           type="radio"
           checked={todo.priority === p}
           onChange={() => changePriority(todo.id, p)}
@@ -56,7 +58,6 @@ Todo.propTypes = {
   todo: todoPropShape.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   toggleTodo: PropTypes.func.isRequired,
-  priority: PropTypes.string.isRequired,
 };
 
 export default connect(
