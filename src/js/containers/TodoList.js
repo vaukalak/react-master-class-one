@@ -2,8 +2,18 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Todo, { todoPropShape } from './Todo';
 
+const selectTodosByPriority = (todos, priority) => {
+  if (priority === 'allPriorities') {
+    return todos;
+  }
+  return todos.filter(t => t.priority === priority);
+};
+
 const mapStateToProps = state => ({
-  todos: state.todos.present,
+  todos: selectTodosByPriority(
+    state.todos.present,
+    state.priorityFilter
+  ),
 });
 
 const mapDispatchToProps = {};

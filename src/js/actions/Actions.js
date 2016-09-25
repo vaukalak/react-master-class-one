@@ -1,4 +1,10 @@
-import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, CHANGE_PRIORITY } from '../constants/ActionTypes';
+import {
+  ADD_TODO,
+  DELETE_TODO,
+  TOGGLE_TODO,
+  CHANGE_PRIORITY,
+  SELECT_PRIORITY_FILTER,
+} from '../constants/ActionTypes';
 
 export const addTodo = name => ({
   type: ADD_TODO,
@@ -18,4 +24,9 @@ export const toggleTodo = id => ({
 export const changePriority = (id, value) => ({
   type: CHANGE_PRIORITY,
   payload: { id, value },
+});
+
+export const selectPriorityFilter = value => ({
+  type: SELECT_PRIORITY_FILTER,
+  payload: value,
 });
