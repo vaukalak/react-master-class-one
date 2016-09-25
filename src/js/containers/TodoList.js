@@ -1,18 +1,14 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as Actions from '../actions/Actions';
 import Todo, { todoPropShape } from './Todo';
-import UndoRedo from './UndoRedo';
 
 const mapStateToProps = state => ({
   todos: state.todos.present,
 });
 
-const mapDispatchToProps = {
-  addTodo: Actions.addTodo,
-};
+const mapDispatchToProps = {};
 
-const TodoList = ({ todos, addTodo }) => (
+const TodoList = ({ todos }) => (
   <div>
     <div style={{ height: '200px', overflow: 'scroll' }}>
       {todos.map(
@@ -24,17 +20,11 @@ const TodoList = ({ todos, addTodo }) => (
         )
       )}
     </div>
-    <br />
-    <button type="button" onClick={() => addTodo('new todo')}>
-      add
-    </button>
-    <UndoRedo />
   </div>
 );
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(todoPropShape).isRequired,
-  addTodo: PropTypes.func.isRequired,
 };
 
 export default connect(

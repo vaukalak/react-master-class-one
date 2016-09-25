@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import DevTools from './containers/DevTools';
-import TodoList from './containers/TodoList';
+import RootContainer from './containers/RootContainer';
 import configureStore from './store';
 
 const store = configureStore();
@@ -10,7 +10,7 @@ const store = configureStore();
 const App = () => (
   <Provider store={store}>
     <div>
-      <TodoList />
+      <RootContainer />
       <DevTools />
     </div>
   </Provider>

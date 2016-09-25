@@ -58,6 +58,7 @@ Todo.propTypes = {
   todo: todoPropShape.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   toggleTodo: PropTypes.func.isRequired,
+  changePriority: PropTypes.func.isRequired,
 };
 
 export default connect(
