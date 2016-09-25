@@ -4,6 +4,7 @@ import {
   TOGGLE_TODO,
   CHANGE_PRIORITY,
   SELECT_PRIORITY_FILTER,
+  SELECT_STATUS_FILTER,
 } from '../constants/ActionTypes';
 
 export const addTodo = name => ({
@@ -28,5 +29,10 @@ export const changePriority = (id, value) => ({
 
 export const selectPriorityFilter = value => ({
   type: SELECT_PRIORITY_FILTER,
+  payload: value,
+});
+
+export const selectStatusFilter = value => ({
+  type: SELECT_STATUS_FILTER,
   payload: value,
 });

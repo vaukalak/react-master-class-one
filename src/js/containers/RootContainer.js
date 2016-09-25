@@ -3,6 +3,7 @@ import TodoList from './TodoList';
 import UndoRedo from './UndoRedo';
 import AddButton from './AddButton';
 import SelectPriorityFilter from './SelectPriorityFilter';
+import SelectStatusFilter from './SelectStatusFilter';
 
 const RootContainer = () => (
   <div>
@@ -12,6 +13,8 @@ const RootContainer = () => (
     <UndoRedo />
     <br />
     <SelectPriorityFilter />
+    <br />
+    <SelectStatusFilter />
   </div>
 );
 
