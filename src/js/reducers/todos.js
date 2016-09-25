@@ -1,9 +1,10 @@
+import undoable from 'redux-undo';
 import { ADD_TODO, DELETE_TODO } from '../constants/ActionTypes';
 
 const initialState = [];
 let todoId = 0;
 
-export default (state = initialState, action) => {
+const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
       {
@@ -24,3 +25,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default undoable(todoReducer);

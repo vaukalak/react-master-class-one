@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/Actions';
 import Todo, { todoPropShape } from './Todo';
+import UndoRedo from './UndoRedo';
 
 const mapStateToProps = state => ({
-  todos: state.todos,
+  todos: state.todos.present,
 });
 
 const mapDispatchToProps = {
@@ -27,6 +28,7 @@ const TodoList = ({ todos, addTodo }) => (
     <button type="button" onClick={() => addTodo('new todo')}>
       add
     </button>
+    <UndoRedo />
   </div>
 );
 
