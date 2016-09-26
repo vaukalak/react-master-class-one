@@ -7,7 +7,7 @@ export const selectTodosByStatus = (todos, status) => {
 };
 
 export const selectTodosByPriority = (todos, priority) => {
-  if (priority === 'allPriorities') {
+  if (priority === 'allPriorities' || !priority) {
     return todos;
   }
   return todos.filter(t => t.priority === priority);

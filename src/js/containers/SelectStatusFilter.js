@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import * as Actions from '../actions/Actions';
 
-const mapStateToProps = s => ({
-  currentFilter: s.statusFilter,
+const mapStateToProps = (status, ownProps) => ({
+  currentFilter: ownProps.params.statusFilter || 'allStatuses',
 });
 const mapDispatchToProps = {
   selectFilter: Actions.selectStatusFilter,
@@ -31,7 +32,9 @@ SelectStatusFilter.propTypes = {
   selectFilter: PropTypes.func.isRequired,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectStatusFilter);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SelectStatusFilter)
+);

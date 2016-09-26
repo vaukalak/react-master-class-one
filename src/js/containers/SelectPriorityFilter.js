@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/Actions';
 
-const mapStateToProps = s => ({
-  currentFilter: s.priorityFilter,
+const mapStateToProps = (state, ownProps) => ({
+  currentFilter: ownProps.params.priorityFilter || 'allPriorities',
 });
+
 const mapDispatchToProps = {
   selectFilter: Actions.selectPriorityFilter,
 };
@@ -31,7 +33,9 @@ SelectPriorityFilter.propTypes = {
   selectFilter: PropTypes.func.isRequired,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectPriorityFilter);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SelectPriorityFilter)
+);

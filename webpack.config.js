@@ -14,6 +14,9 @@ module.exports = {
     publicPath: 'http://localhost:8080/',
     filename: 'bundle.js',
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',

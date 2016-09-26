@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import Todo, { todoPropShape } from './Todo';
 import { selectTodosByPriority, selectTodosByStatus } from '../selectors';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   todos: selectTodosByStatus(
     selectTodosByPriority(
       state.todos.present,
-      state.priorityFilter
+      ownProps.router.params.priorityFilter
     ),
-    state.statusFilter
+    ownProps.router.params.statusFilter
   ),
 });
 
@@ -34,8 +35,10 @@ TodoList.propTypes = {
   todos: PropTypes.arrayOf(todoPropShape).isRequired,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoList);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(TodoList)
+);
 
